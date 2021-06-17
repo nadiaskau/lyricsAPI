@@ -1,10 +1,10 @@
 
 let lastFM_APIkey = "f59b1842961e265d09326395fb461985";
-let toptracksAPI = `http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=denmark&api_key=${lastFM_APIkey}&format=json`; 
+let toptracksAPI = 
+    `http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=denmark&api_key=${lastFM_APIkey}&format=json`; 
 let toptracks; 
 
 //Getting our top tracks
-
     fetch(toptracksAPI)
     .then(response => response.json())
     .then(function(data){
@@ -29,7 +29,10 @@ function getLyrics(ev){
     let lyricsAPI = `https://api.lyrics.ovh/v1/${artist}/${title}`; 
     let lyrics = document.getElementById("lyrics");
 
-    fetch(lyricsAPI)
+    fetch(lyricsAPI, {
+        method: 'GET',
+        mode: 'no-cors'
+    })
     .then(response => response.json())
     .then(function(data){
         lyrics.innerHTML = data.lyrics;
